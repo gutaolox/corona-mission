@@ -60,22 +60,22 @@ export class HomePage implements OnInit {
         if (missionsToday === 0) {
           const daysAgoMissions = this.getLastUpdateChallenge(contactValue.challenges);
           if (daysAgoMissions < 3) {
-            contactValue.mission = "Você fez " + missionsToday.toString() + " missões hoje!";
+            contactValue.mission = "Você fez " + missionsToday.toString() + (missionsToday>1 ? " missões hoje!":" missão hoje!");
             contactValue.mission_label_color = "dark";
             contactValue.mission_color = "dark";
             contactValue.color = '';
           }
           else {
-            contactValue.mission = daysAgoMissions.toString() + " dias sem missão.";
+            contactValue.mission = daysAgoMissions.toString() + (daysAgoMissions>1 ? " dias sem missão.": " dia sem missão.");
             contactValue.mission_label_color = "danger";
-            contactValue.mission_color = "danger";
+            contactValue.mission_color = "dark";
             contactValue.color = '#eb445a';
           }
         }
         else {
-          contactValue.mission = "Você fez " + missionsToday.toString() + " missões hoje!";
+          contactValue.mission =  "Você fez " + missionsToday.toString() + (missionsToday>1 ? " missões hoje!":" missão hoje!");
           contactValue.mission_label_color = "secondary";
-          contactValue.mission_color = "secondary";
+          contactValue.mission_color = "dark";
           contactValue.color = '#3dc2ff';
         }
       }
