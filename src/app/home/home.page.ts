@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
   checkColorAndMessage() {
     for (var key in this.registeredUsers) {
       var contactValue = this.registeredUsers[key];
-      if (contactValue.challenges) {
+      if (contactValue.challenges && this.anyChangeInChallange(contactValue.challenges)) {
         const missionsToday = this.getMissionsToday(contactValue.challenges);
         if (missionsToday === 0) {
           const daysAgoMissions = this.getLastUpdateChallenge(contactValue.challenges);
@@ -99,7 +99,7 @@ export class HomePage implements OnInit {
         return chaDate1.getTime() - chaDate2.getTime();
       }
     })[challenges.length - 1];
-    var daysInMiliseconds = new Date().getTime() - new Date(mostRecentChallenge.lastChange).getTime();
+    var daysInMiliseconds = new Date(new Date().getTime()- (3*3600*1000)).getTime() - new Date(mostRecentChallenge.lastChange).getTime();
     var days = Math.floor(daysInMiliseconds / (1000 * 3600 * 24));
     return days;
 
@@ -111,6 +111,16 @@ export class HomePage implements OnInit {
       (new Date(challenge.lastChange).getDate() === date.getDate() &&
         new Date(challenge.lastChange).getMonth() === date.getMonth() &&
         new Date(challenge.lastChange).getFullYear() === date.getFullYear())).length;
+  }
+
+  anyChangeInChallange(challenges)
+  {
+    for(var key in challenges)
+    {
+      if(challenges[key].lastChange)
+        return true; 
+    }
+    return false;
   }
 
   openDetail(id) {
