@@ -39,7 +39,7 @@ export class LoginEmailPage implements OnInit {
 
     this.isSubmitted = true;
     if (!this.ionicForm.valid) {
-      
+
       const toast = await this.toastCtrl.create({
         message: 'Dados inválidos.',
         duration: 3000,
@@ -55,8 +55,10 @@ export class LoginEmailPage implements OnInit {
       await this.loading.present();
       await this.authFirebaseService.doLoginEmail(this.ionicForm.value.email, this.ionicForm.value.password).then((res) => {
         this.loading.dismiss();
-        this.nvc.navigateForward('/home');
-      });
+        this.nvc.navigateForward('/home')
+      }).catch((error) => {
+        this.loading.dismiss();
+      });;
     }
   }
 
